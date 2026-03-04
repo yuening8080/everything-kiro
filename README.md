@@ -1,93 +1,228 @@
-# everything-kiro
+# Everything Kiro
 
+**The performance optimization system for [Kiro IDE](https://kiro.dev).** Steering rules, agent hooks, workflow skills, and MCP configurations — production-ready and evolved for real-world AI-assisted development.
 
+Not just configs. A complete system that makes Kiro more consistent, more systematic, and less likely to skip steps. Encoding your team's standards into steering rules, automating quality checks with hooks, and providing structured workflows as on-demand skills.
 
-## Getting started
+Inspired by [everything-claude-code](https://github.com/affaan-m/everything-claude-code) — adapted for Kiro's native capabilities: steering files, agent hooks, specs, and MCP integrations.
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+---
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+## Why This Exists
 
-## Add your files
+AI coding assistants are good most of the time. The problem is consistency. Without explicit rules:
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/topics/git/add_files/#add-files-to-a-git-repository) or push an existing Git repository with the following command:
+- Security checks get skipped when context is long
+- Commit messages drift from conventions
+- Tests get written after implementation (or not at all)
+- Language-specific best practices get missed
+
+Everything Kiro closes the gap between best-case and average-case behavior by encoding standards directly into the system. The rules are always there — not as suggestions, but as loaded context that shapes every interaction.
+
+---
+
+## What's Inside
 
 ```
-cd existing_repo
-git remote add origin https://gitlab.aws.dev/nyue/everything-kiro.git
-git branch -M main
-git push -uf origin main
+everything-kiro/
+├── steering/
+│   ├── always/              # Loaded into every conversation
+│   │   ├── coding-style.md      # Immutability, file org, error handling
+│   │   ├── git-workflow.md       # Conventional commits, branching, PR process
+│   │   ├── testing.md            # TDD workflow, 80% coverage, test types
+│   │   ├── security.md           # OWASP Top 10, secret management, dangerous patterns
+│   │   ├── performance.md        # Frontend/backend optimization, anti-patterns
+│   │   └── patterns.md           # SOLID, design patterns, architecture guidelines
+│   ├── conditional/         # Loaded when matching files are opened
+│   │   ├── react-patterns.md     # Hooks, components, state, accessibility
+│   │   ├── typescript-strict.md  # Type safety, generics, discriminated unions
+│   │   ├── node-backend.md       # Express, middleware, DB, API design
+│   │   └── python-patterns.md    # PEP 8, async, pytest, project structure
+│   └── manual/              # Activated on-demand with # in chat
+│       ├── tdd-workflow.md       # RED → GREEN → REFACTOR cycle
+│       ├── code-review.md        # Severity-ranked review checklist
+│       ├── security-review.md    # Full OWASP audit workflow
+│       ├── planning.md           # Phased implementation planning
+│       ├── refactoring.md        # Safe refactoring patterns
+│       └── e2e-testing.md        # Playwright patterns and Page Object Model
+├── hooks/                   # Automated agent actions on IDE events
+│   ├── security-check.json       # Scan for secrets before every file write
+│   ├── validate-api-changes.json # Check frontend/backend sync on route edits
+│   ├── review-before-push.json   # Verify tests/secrets before git push
+│   ├── lint-on-save.json         # Auto-lint JS/TS files on save
+│   ├── test-on-save.json         # Run related tests when test files change
+│   ├── commit-message.json       # Generate conventional commit (manual trigger)
+│   └── post-task-tests.json      # Run test suite after spec task completion
+├── mcp/
+│   └── mcp.json             # MCP server configurations (AWS docs, Playwright, fetch)
+├── install.sh               # Installer script
+└── README.md
 ```
 
-## Integrate with your tools
+---
 
-- [ ] [Set up project integrations](https://gitlab.aws.dev/nyue/everything-kiro/-/settings/integrations)
+## How It Works
 
-## Collaborate with your team
+### Steering Rules (Always-On)
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/user/project/merge_requests/auto_merge/)
+These load into every Kiro conversation automatically. You don't activate them — they're just there, shaping behavior:
 
-## Test and Deploy
+- **coding-style.md** — Enforces immutability, small files, proper error handling, input validation
+- **security.md** — OWASP awareness, secret detection, dangerous pattern flagging
+- **testing.md** — TDD workflow, 80% coverage target, test quality standards
+- **git-workflow.md** — Conventional commits, branching strategy, pre-commit checklist
+- **performance.md** — Lazy loading, pagination, caching, N+1 prevention
+- **patterns.md** — SOLID principles, composition over inheritance, clean architecture
 
-Use the built-in continuous integration in GitLab.
+### Conditional Steering (File-Match)
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+Loaded automatically when you open matching files — no wasted context on irrelevant rules:
 
-***
+| File | Triggers On | What It Adds |
+|------|------------|-------------|
+| `react-patterns.md` | `*.jsx`, `*.tsx` | Hook rules, component patterns, accessibility |
+| `typescript-strict.md` | `*.ts`, `*.tsx` | Type safety, avoid `any`, discriminated unions |
+| `node-backend.md` | `server.js`, `*route*.js` | Express patterns, parameterized queries, API design |
+| `python-patterns.md` | `*.py` | PEP 8, type hints, pytest, async patterns |
 
-# Editing this README
+### Manual Skills (On-Demand)
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+Activate in chat by typing `#skill-name`. These provide structured workflows:
 
-## Suggestions for a good README
+| Skill | What It Does |
+|-------|-------------|
+| `#tdd-workflow` | Strict RED → GREEN → REFACTOR cycle with test templates |
+| `#code-review` | Severity-ranked checklist (CRITICAL → LOW) with confidence filtering |
+| `#security-review` | Full OWASP Top 10 audit with dependency scanning |
+| `#planning` | Phased implementation planning with risks and testing strategy |
+| `#refactoring` | Safe refactoring patterns: extract, early return, dead code removal |
+| `#e2e-testing` | Playwright E2E patterns with Page Object Model |
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+### Agent Hooks
 
-## Name
-Choose a self-explaining name for your project.
+Automated actions triggered by IDE events — catches things you'd forget in a long session:
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+| Hook | Trigger | What It Does |
+|------|---------|-------------|
+| Security Check | Before every file write | Scans for hardcoded secrets and dangerous patterns |
+| API Validation | Backend route file edited | Checks if frontend still matches changed endpoints |
+| Review Before Push | Before shell commands | Verifies tests/secrets before `git push` |
+| Lint on Save | JS/TS file saved | Auto-runs ESLint with fixes |
+| Test on Save | Test file saved | Runs related tests automatically |
+| Commit Message | Manual trigger | Generates conventional commit from current diff |
+| Post-Task Tests | Spec task completed | Runs full test suite to catch regressions |
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+---
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+## Quick Start
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+### Option 1: Installer Script
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+```bash
+# Clone the repo
+git clone git@ssh.gitlab.aws.dev:nyue/everything-kiro.git
+cd everything-kiro
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+# Install into a project
+./install.sh /path/to/your/project
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+# Or install globally (user-level, applies to all projects)
+./install.sh --global
+```
+
+The installer copies files without overwriting existing ones — safe to run multiple times.
+
+### Option 2: Manual Copy
+
+Pick what you need:
+
+```bash
+git clone git@ssh.gitlab.aws.dev:nyue/everything-kiro.git
+
+# Copy steering rules to your project
+cp everything-kiro/steering/always/*.md /path/to/project/.kiro/steering/
+cp everything-kiro/steering/conditional/*.md /path/to/project/.kiro/steering/
+cp everything-kiro/steering/manual/*.md /path/to/project/.kiro/steering/
+
+# Copy hooks
+cp everything-kiro/hooks/*.json /path/to/project/.kiro/hooks/
+
+# Copy MCP config (if you don't have one already)
+cp everything-kiro/mcp/mcp.json /path/to/project/.kiro/settings/mcp.json
+```
+
+### Option 3: Cherry-Pick
+
+Just grab individual files. Every steering file and hook is self-contained — no dependencies between them.
+
+---
+
+## Customization
+
+Everything is markdown and JSON. Edit to match your team:
+
+- **Add language rules** — Create new files in `steering/conditional/` with `fileMatchPattern`
+- **Add project skills** — Create new files in `steering/manual/` with `inclusion: manual`
+- **Adjust hooks** — Edit trigger patterns, change commands, add new automations
+- **Add MCP servers** — Extend `mcp/mcp.json` with your team's tools
+
+### Steering File Anatomy
+
+```markdown
+---
+inclusion: always          # always | fileMatch | manual
+fileMatchPattern: "*.py"   # only for fileMatch inclusion
+---
+
+# Your Rule Title
+
+Your guidelines here. Kiro reads this as context
+and follows it during every interaction.
+```
+
+### Hook File Anatomy
+
+```json
+{
+  "name": "My Hook",
+  "version": "1.0.0",
+  "when": {
+    "type": "fileEdited",
+    "patterns": ["*.ts"]
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "npm run lint"
+  }
+}
+```
+
+---
+
+## Philosophy
+
+1. **Steering over prompting** — Encode standards once, apply everywhere
+2. **Hooks over reminders** — Automate what you'd otherwise forget
+3. **Skills over copy-paste** — Reusable workflows activated on demand
+4. **Conditional over bloated** — Load context only when relevant
+5. **Minimal over maximal** — Every rule earns its place
+
+---
+
+## What This Is NOT
+
+- Not a plugin system (Kiro doesn't have one yet)
+- Not a replacement for project-specific steering (add your own alongside these)
+- Not prescriptive about your stack (the conditional rules only load when relevant)
+
+---
 
 ## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+Add your own steering rules, hooks, or skills and submit a merge request. Each file should be self-contained and follow the patterns above.
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+---
 
 ## License
-For open source projects, say how it is licensed.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+MIT

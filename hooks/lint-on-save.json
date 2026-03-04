@@ -1,0 +1,13 @@
+{
+  "name": "Lint on Save",
+  "version": "1.0.0",
+  "description": "Automatically run linter when TypeScript/JavaScript files are saved",
+  "when": {
+    "type": "fileEdited",
+    "patterns": ["*.ts", "*.tsx", "*.js", "*.jsx"]
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "npx eslint --fix --quiet ${file} 2>/dev/null || true"
+  }
+}

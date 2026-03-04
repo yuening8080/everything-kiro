@@ -1,0 +1,13 @@
+{
+  "name": "Security Check on Write",
+  "version": "1.0.0",
+  "description": "Scan for hardcoded secrets and dangerous patterns before writing files",
+  "when": {
+    "type": "preToolUse",
+    "toolTypes": ["write"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Before writing this file, quickly check: Does the content contain any hardcoded secrets (API keys, passwords, tokens, connection strings)? Does it use string-concatenated SQL queries? Does it use eval() with external input? Does it set innerHTML with user-provided content? If any of these are found, flag them and suggest fixes before proceeding."
+  }
+}

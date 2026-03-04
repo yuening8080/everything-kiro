@@ -1,0 +1,12 @@
+{
+  "name": "Run Tests After Task",
+  "version": "1.0.0",
+  "description": "Automatically run the test suite after completing a spec task",
+  "when": {
+    "type": "postTaskExecution"
+  },
+  "then": {
+    "type": "runCommand",
+    "command": "npm test -- --watchAll=false 2>/dev/null || npx vitest run 2>/dev/null || npx jest --bail 2>/dev/null || echo 'No test runner found'"
+  }
+}

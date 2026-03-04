@@ -1,0 +1,13 @@
+{
+  "name": "Validate API Changes",
+  "version": "1.0.0",
+  "description": "Check for breaking API changes when backend route files are modified",
+  "when": {
+    "type": "fileEdited",
+    "patterns": ["**/route*.js", "**/route*.ts", "**/controller*.js", "**/controller*.ts", "**/server.js"]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A backend route/controller file was modified. Check if any API endpoint signatures changed (URL path, HTTP method, request body shape, response shape). If so, verify that frontend code consuming these endpoints is updated accordingly. Flag any potential breaking changes."
+  }
+}
