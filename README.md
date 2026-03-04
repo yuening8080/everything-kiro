@@ -1,8 +1,8 @@
 # Everything Kiro
 
-**The performance optimization system for [Kiro IDE](https://kiro.dev).** Steering rules, agent hooks, workflow skills, and MCP configurations — production-ready and evolved for real-world AI-assisted development.
+**The performance optimization system for [Kiro IDE](https://kiro.dev).** Steering rules, agent hooks, and MCP configurations — production-ready and evolved for real-world AI-assisted development.
 
-Not just configs. A complete system that makes Kiro more consistent, more systematic, and less likely to skip steps. Encoding your team's standards into steering rules, automating quality checks with hooks, and providing structured workflows as on-demand skills.
+Not just configs. A complete system that makes Kiro more consistent, more systematic, and less likely to skip steps. Encoding your team's standards into steering rules, automating quality checks with hooks, and providing structured workflows as on-demand manual steering.
 
 Inspired by [everything-claude-code](https://github.com/affaan-m/everything-claude-code) — adapted for Kiro's native capabilities: steering files, agent hooks, specs, and MCP integrations.
 
@@ -85,11 +85,11 @@ Loaded automatically when you open matching files — no wasted context on irrel
 | `node-backend.md` | `server.js`, `*route*.js` | Express patterns, parameterized queries, API design |
 | `python-patterns.md` | `*.py` | PEP 8, type hints, pytest, async patterns |
 
-### Manual Skills (On-Demand)
+### Manual Steering (On-Demand)
 
-Activate in chat by typing `#skill-name`. These provide structured workflows:
+Activate in chat by typing `#name`. These provide structured workflows loaded into context on demand:
 
-| Skill | What It Does |
+| Steering File | What It Does |
 |-------|-------------|
 | `#tdd-workflow` | Strict RED → GREEN → REFACTOR cycle with test templates |
 | `#code-review` | Severity-ranked checklist (CRITICAL → LOW) with confidence filtering |
@@ -162,7 +162,7 @@ Just grab individual files. Every steering file and hook is self-contained — n
 Everything is markdown and JSON. Edit to match your team:
 
 - **Add language rules** — Create new files in `steering/conditional/` with `fileMatchPattern`
-- **Add project skills** — Create new files in `steering/manual/` with `inclusion: manual`
+- **Add manual steering** — Create new files in `steering/manual/` with `inclusion: manual`
 - **Adjust hooks** — Edit trigger patterns, change commands, add new automations
 - **Add MCP servers** — Extend `mcp/mcp.json` with your team's tools
 
@@ -203,7 +203,7 @@ and follows it during every interaction.
 
 1. **Steering over prompting** — Encode standards once, apply everywhere
 2. **Hooks over reminders** — Automate what you'd otherwise forget
-3. **Skills over copy-paste** — Reusable workflows activated on demand
+3. **Manual steering over copy-paste** — Reusable workflows activated on demand
 4. **Conditional over bloated** — Load context only when relevant
 5. **Minimal over maximal** — Every rule earns its place
 
@@ -219,7 +219,7 @@ and follows it during every interaction.
 
 ## Contributing
 
-Add your own steering rules, hooks, or skills and submit a merge request. Each file should be self-contained and follow the patterns above.
+Add your own steering rules, hooks, or manual steering files and submit a merge request. Each file should be self-contained and follow the patterns above.
 
 ---
 

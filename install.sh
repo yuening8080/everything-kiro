@@ -98,7 +98,7 @@ done
 
 # Manual skills
 echo ""
-echo "Manual skills (on-demand):"
+echo "Manual steering (on-demand):"
 for f in "$SCRIPT_DIR/steering/manual/"*.md; do
   [ -f "$f" ] && copy_if_not_exists "$f" "$KIRO_DIR/steering"
 done
@@ -127,11 +127,11 @@ echo ""
 echo "What's installed:"
 echo "  • $(ls "$SCRIPT_DIR/steering/always/"*.md 2>/dev/null | wc -l | tr -d ' ') always-on steering rules"
 echo "  • $(ls "$SCRIPT_DIR/steering/conditional/"*.md 2>/dev/null | wc -l | tr -d ' ') conditional steering rules"
-echo "  • $(ls "$SCRIPT_DIR/steering/manual/"*.md 2>/dev/null | wc -l | tr -d ' ') manual skills (activate with # in chat)"
+echo "  • $(ls "$SCRIPT_DIR/steering/manual/"*.md 2>/dev/null | wc -l | tr -d ' ') manual steering files (activate with # in chat)"
 echo "  • $(ls "$SCRIPT_DIR/hooks/"*.json 2>/dev/null | wc -l | tr -d ' ') agent hooks"
 echo ""
 echo "Next steps:"
 echo "  1. Open your project in Kiro"
 echo "  2. Steering rules load automatically"
-echo "  3. Use # in chat to activate manual skills"
+echo "  3. Use # in chat to activate manual steering files"
 echo "  4. Check Agent Hooks panel to see installed hooks"
