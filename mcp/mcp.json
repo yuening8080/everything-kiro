@@ -9,12 +9,6 @@
       "disabled": false,
       "autoApprove": []
     },
-    "playwright": {
-      "command": "npx",
-      "args": ["@anthropic-ai/mcp-playwright@latest"],
-      "disabled": false,
-      "autoApprove": []
-    },
     "fetch": {
       "command": "uvx",
       "args": ["mcp-fetch"],
