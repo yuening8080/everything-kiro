@@ -28,6 +28,7 @@ usage() {
   echo ""
   echo "Components installed:"
   echo "  steering/always/      → Always-on coding standards"
+  echo "  steering/auto/        → Auto-included when Kiro deems relevant"
   echo "  steering/conditional/ → File-match triggered patterns"
   echo "  steering/manual/      → On-demand skills (activate with # in chat)"
   echo "  hooks/                → Agent hooks for automation"
@@ -89,6 +90,13 @@ for f in "$SCRIPT_DIR/steering/always/"*.md; do
   [ -f "$f" ] && copy_if_not_exists "$f" "$KIRO_DIR/steering"
 done
 
+# Auto steering
+echo ""
+echo "Auto rules (included when relevant):"
+for f in "$SCRIPT_DIR/steering/auto/"*.md; do
+  [ -f "$f" ] && copy_if_not_exists "$f" "$KIRO_DIR/steering"
+done
+
 # Conditional steering
 echo ""
 echo "Conditional rules (file-match):"
@@ -126,6 +134,7 @@ echo -e "${GREEN}Done!${NC} Everything Kiro installed successfully."
 echo ""
 echo "What's installed:"
 echo "  • $(ls "$SCRIPT_DIR/steering/always/"*.md 2>/dev/null | wc -l | tr -d ' ') always-on steering rules"
+echo "  • $(ls "$SCRIPT_DIR/steering/auto/"*.md 2>/dev/null | wc -l | tr -d ' ') auto steering rules"
 echo "  • $(ls "$SCRIPT_DIR/steering/conditional/"*.md 2>/dev/null | wc -l | tr -d ' ') conditional steering rules"
 echo "  • $(ls "$SCRIPT_DIR/steering/manual/"*.md 2>/dev/null | wc -l | tr -d ' ') manual steering files (activate with # in chat)"
 echo "  • $(ls "$SCRIPT_DIR/hooks/"*.json 2>/dev/null | wc -l | tr -d ' ') agent hooks"
