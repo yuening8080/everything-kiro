@@ -6,6 +6,8 @@ Not just configs. A complete system that makes Kiro more consistent, more system
 
 Inspired by [everything-claude-code](https://github.com/affaan-m/everything-claude-code) — adapted for Kiro's native capabilities: steering files, agent hooks, specs, and MCP integrations.
 
+📝 [Read the full blog post: Steering Kiro — Best Practices, Pitfalls, and When to Use Something Else](https://builder.aws.com/content/3AX80b0O3lZlJLrimxmtumlH7fJ/steering-kiro-best-practices-pitfalls-and-when-to-use-something-else)
+
 ---
 
 ## Why This Exists
@@ -58,6 +60,18 @@ everything-kiro/
 ├── install.sh               # Installer script
 └── README.md
 ```
+
+---
+
+## Foundational Steering Files (Generate These First)
+
+Before installing everything-kiro, use Kiro's built-in generator to create your project's foundational steering files. Navigate to the Steering section in the Kiro panel and click "Generate Steering Docs" (or click the + button and select "Foundation steering files"). Kiro will create three files:
+
+- **product.md** — Your product's purpose, target users, key features, and business objectives. Helps Kiro understand the "why" behind technical decisions.
+- **tech.md** — Your chosen frameworks, libraries, tools, and constraints. Kiro will prefer your established stack over alternatives.
+- **structure.md** — File organization, naming conventions, import patterns, and architectural decisions. Ensures generated code fits your existing codebase.
+
+These three files are included in every interaction by default and form the baseline of Kiro's project understanding. They're also the highest-value steering you can have, project-specific context that Kiro can't infer on its own. Everything-kiro intentionally does not ship its own versions of these because they should be generated fresh for each project.
 
 ---
 
@@ -120,7 +134,7 @@ Automated actions triggered by IDE events — catches things you'd forget in a l
 
 ```bash
 # Clone the repo
-git clone git@ssh.gitlab.aws.dev:nyue/everything-kiro.git
+git clone git@github.com:yuening8080/everything-kiro.git
 cd everything-kiro
 
 # Install into a project
@@ -137,7 +151,7 @@ The installer copies files without overwriting existing ones — safe to run mul
 Pick what you need:
 
 ```bash
-git clone git@ssh.gitlab.aws.dev:nyue/everything-kiro.git
+git clone git@github.com:yuening8080/everything-kiro.git
 
 # Copy steering rules to your project
 cp everything-kiro/steering/always/*.md /path/to/project/.kiro/steering/
